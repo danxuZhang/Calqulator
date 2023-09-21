@@ -95,6 +95,6 @@ void Calqulator::ChangeNumberSign() {
     if (reg.match(displayVal).hasMatch()) {
         double dblDisplayVal     = displayVal.toDouble();
         double dblDisplayValSign = -1 * dblDisplayVal;
-        ui->Display->setText(QString::number(dblDisplayVal));
+        ui->Display->setText(QString::number(dblDisplayValSign));
     }
 }
