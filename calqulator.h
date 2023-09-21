@@ -2,6 +2,7 @@
 #define CALQULATOR_H
 
 #include <QMainWindow>
+#include <QRegularExpression>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,5 +19,11 @@ class Calqulator : public QMainWindow {
 
   private:
     Ui::Calqulator *ui;
+
+  private slots:
+    void NumPressed();
+    void MathButtonPressed();
+    void EqualButtonPressed();
+    void ChangeNumberSign();
 };
 #endif // CALQULATOR_H

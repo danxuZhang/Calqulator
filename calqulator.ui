@@ -516,7 +516,7 @@ QPushButton:pressed {
      </widget>
     </item>
     <item row="0" column="0" colspan="5">
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="Display">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
         <horstretch>0</horstretch>
