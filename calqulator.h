@@ -26,5 +26,6 @@ class Calqulator : public QMainWindow {
     void EqualButtonPressed();
     void AllClear();
     void ChangeNumberSign();
+    void PercentagePressed();
 };
 #endif // CALQULATOR_H

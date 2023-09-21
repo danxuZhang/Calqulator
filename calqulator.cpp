@@ -20,6 +20,8 @@ Calqulator::Calqulator(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calqul
         connect(numButtons[i], SIGNAL(released()), this, SLOT(NumPressed()));
     }
 
+    connect(ui->Dot, SIGNAL(released()), this, SLOT(NumPressed()));
+
     connect(ui->Plus, SIGNAL(released()), this, SLOT(MathButtonPressed()));
     connect(ui->Subtract, SIGNAL(released()), this, SLOT(MathButtonPressed()));
     connect(ui->Multiply, SIGNAL(released()), this, SLOT(MathButtonPressed()));
@@ -28,6 +30,7 @@ Calqulator::Calqulator(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calqul
     connect(ui->Equals, SIGNAL(released()), this, SLOT(EqualButtonPressed()));
     connect(ui->ChangeSign, SIGNAL(released()), this, SLOT(ChangeNumberSign()));
     connect(ui->Clear, SIGNAL(released()), this, SLOT(AllClear()));
+    connect(ui->Percentage, SIGNAL(released()), this, SLOT(PercentagePressed()));
 }
 
 Calqulator::~Calqulator() {
@@ -39,12 +42,11 @@ void Calqulator::NumPressed() {
     QString butVal      = button->text();
     QString displayVal  = ui->Display->text();
 
-    if (displayVal.toDouble() == 0 || displayVal.toDouble() == 0.0) {
+    if (displayVal.toDouble() == 0) {
         ui->Display->setText(butVal);
     } else {
-        QString newVal   = displayVal + butVal;
-        double dblNewVal = newVal.toDouble();
-        ui->Display->setText(QString::number(dblNewVal, 'g', 16));
+        QString newVal = displayVal + butVal;
+        ui->Display->setText(newVal);
     }
 }
 
@@ -88,6 +90,12 @@ void Calqulator::EqualButtonPressed() {
     }
 
     ui->Display->setText(QString::number(solution));
+
+    addTriggered = false;
+    subTriggered = false;
+    mulTriggered = false;
+    divTriggered = false;
+    calcVal      = 0;
 }
 
 void Calqulator::ChangeNumberSign() {
@@ -98,6 +106,19 @@ void Calqulator::ChangeNumberSign() {
         double dblDisplayValSign = -1 * dblDisplayVal;
         ui->Display->setText(QString::number(dblDisplayValSign));
     }
+}
+
+void Calqulator::PercentagePressed() {
+    QString displayVal = ui->Display->text();
+    QRegularExpression reg("[-]?[0-9.]*");
+
+    if (!reg.match(displayVal).hasMatch()) {
+        return;
+    }
+
+    double dblDisplayVal = displayVal.toDouble();
+    double percentageVal = 0.01 * dblDisplayVal;
+    ui->Display->setText(QString::number(percentageVal));
 }
 
 void Calqulator::AllClear() {
