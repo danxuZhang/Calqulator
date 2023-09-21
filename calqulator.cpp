@@ -27,6 +27,7 @@ Calqulator::Calqulator(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calqul
 
     connect(ui->Equals, SIGNAL(released()), this, SLOT(EqualButtonPressed()));
     connect(ui->ChangeSign, SIGNAL(released()), this, SLOT(ChangeNumberSign()));
+    connect(ui->Clear, SIGNAL(released()), this, SLOT(AllClear()));
 }
 
 Calqulator::~Calqulator() {
@@ -97,4 +98,14 @@ void Calqulator::ChangeNumberSign() {
         double dblDisplayValSign = -1 * dblDisplayVal;
         ui->Display->setText(QString::number(dblDisplayValSign));
     }
+}
+
+void Calqulator::AllClear() {
+    addTriggered = false;
+    subTriggered = false;
+    mulTriggered = false;
+    divTriggered = false;
+
+    calcVal = 0;
+    ui->Display->setText(QString::number(calcVal));
 }

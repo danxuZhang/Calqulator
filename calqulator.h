@@ -24,6 +24,7 @@ class Calqulator : public QMainWindow {
     void NumPressed();
     void MathButtonPressed();
     void EqualButtonPressed();
+    void AllClear();
     void ChangeNumberSign();
 };
 #endif // CALQULATOR_H
